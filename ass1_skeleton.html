@@ -8724,14 +8724,14 @@ Scenario 4 - Merged Test Set with Merged Support Set Accuracy: 0.6574 and Balanc
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [41]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">entropy</span>
 
-<span class="k">def</span> <span class="nf">dynamic_k_recommendations</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">max_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">catalog_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">dynamicrecommendations</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="n">max_k</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">catalog_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">catalog_labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"catalog_labels must be provided."</span><span class="p">)</span>
 
@@ -8820,7 +8820,7 @@ Scenario 4 - Merged Test Set with Merged Support Set Accuracy: 0.6574 and Balanc
     <span class="k">return</span> <span class="n">thresholds</span><span class="p">,</span> <span class="n">error_rates</span><span class="p">,</span> <span class="n">coverage_rates</span>
 
 
-<span class="n">recommendations</span><span class="p">,</span> <span class="n">confidence_scores</span> <span class="o">=</span> <span class="n">dynamic_k_recommendations</span><span class="p">(</span>
+<span class="n">recommendations</span><span class="p">,</span> <span class="n">confidence_scores</span> <span class="o">=</span> <span class="n">dynamicrecommendations</span><span class="p">(</span>
     <span class="n">distances</span><span class="o">=</span><span class="n">distances</span><span class="p">,</span>
     <span class="n">max_k</span><span class="o">=</span><span class="mi">27</span><span class="p">,</span>
     <span class="n">catalog_labels</span><span class="o">=</span><span class="n">support_labels</span>
@@ -9167,7 +9167,7 @@ c:\Users\gabri\anaconda3\Lib\site-packages\sklearn\manifold\_t_sne.py:1164: Futu
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Subset</span>
@@ -9213,15 +9213,15 @@ c:\Users\gabri\anaconda3\Lib\site-packages\sklearn\manifold\_t_sne.py:1164: Futu
 <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">closest_to_centroid</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">centroid</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">centroid</span><span class="p">(</span><span class="n">embeddings</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">centroid</span><span class="p">):</span>
     <span class="n">class_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">class_id</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">class_embs</span> <span class="o">=</span> <span class="n">embeddings</span><span class="p">[</span><span class="n">class_indices</span><span class="p">]</span>
     <span class="n">dists</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">class_embs</span> <span class="o">-</span> <span class="n">centroid</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">closest_idx</span> <span class="o">=</span> <span class="n">class_indices</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">dists</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">closest_idx</span>  <span class="c1"># index in dataset</span>
 
-<span class="n">idx_tshirt</span> <span class="o">=</span> <span class="n">closest_to_centroid</span><span class="p">(</span><span class="n">embeddings2</span><span class="p">,</span> <span class="n">labels2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Tshirts"</span><span class="p">])</span>
-<span class="n">idx_shirt</span> <span class="o">=</span> <span class="n">closest_to_centroid</span><span class="p">(</span><span class="n">embeddings2</span><span class="p">,</span> <span class="n">labels2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Shirts"</span><span class="p">])</span>
+<span class="n">idx_tshirt</span> <span class="o">=</span> <span class="n">centroid</span><span class="p">(</span><span class="n">embeddings2</span><span class="p">,</span> <span class="n">labels2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Tshirts"</span><span class="p">])</span>
+<span class="n">idx_shirt</span> <span class="o">=</span> <span class="n">centroid</span><span class="p">(</span><span class="n">embeddings2</span><span class="p">,</span> <span class="n">labels2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Shirts"</span><span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">show_image_by_index</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">""</span><span class="p">):</span>
     <span class="n">image</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
@@ -9234,8 +9234,8 @@ c:\Users\gabri\anaconda3\Lib\site-packages\sklearn\manifold\_t_sne.py:1164: Futu
 <span class="n">show_image_by_index</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">idx_shirt</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Closest to Shirt Centroid"</span><span class="p">)</span>
 
 
-<span class="n">idx_tshirt_test</span> <span class="o">=</span> <span class="n">closest_to_centroid</span><span class="p">(</span><span class="n">embeddings1</span><span class="p">,</span> <span class="n">labels1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Tshirts"</span><span class="p">])</span>
-<span class="n">idx_shirt_test</span> <span class="o">=</span> <span class="n">closest_to_centroid</span><span class="p">(</span><span class="n">embeddings1</span><span class="p">,</span> <span class="n">labels1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Shirts"</span><span class="p">])</span>
+<span class="n">idx_tshirt_test</span> <span class="o">=</span> <span class="n">centroid</span><span class="p">(</span><span class="n">embeddings1</span><span class="p">,</span> <span class="n">labels1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Tshirts"</span><span class="p">])</span>
+<span class="n">idx_shirt_test</span> <span class="o">=</span> <span class="n">centroid</span><span class="p">(</span><span class="n">embeddings1</span><span class="p">,</span> <span class="n">labels1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">train_centroids</span><span class="p">[</span><span class="s2">"Shirts"</span><span class="p">])</span>
 <span class="sd">'''show_image_by_index(main_test_dataset, idx_tshirt_test, title="Closest T-shirt in Test Set")</span>
 <span class="sd">show_image_by_index(main_test_dataset, idx_shirt_test, title="Closest Shirt in Test Set")</span>
 <span class="sd">'''</span>
